@@ -53,6 +53,12 @@ FROM (
             WHEN AVG(rating) > 6 THEN 'average'
             ELSE 'bad'
         END AS quality_class,
+         MAX(CASE WHEN year = EXTRACT(YEAR FROM CURRENT_DATE()) THEN TRUE ELSE FALSE END) AS is_active,
+        year
+    FROM actor_films_raw
+    GROUP BY actorid, year
+)
+GROUP BY actorid, actor, quality_class, is_active;
         MAX(CASE WHEN year = EXTRACT(YEAR FROM CURRENT_DATE()) THEN TRUE ELSE FALSE END) AS is_active,
         year
     FROM actor_films_raw
