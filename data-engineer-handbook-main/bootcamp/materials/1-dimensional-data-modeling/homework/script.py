@@ -66,3 +66,11 @@ GROUP BY actorid, actor, quality_class, is_active;
 )
 GROUP BY actorid, actor, quality_class, is_active;
 
+MERGE INTO actors_history_scd AS scd
+USING actors AS a
+ON scd.actorid = a.actorid AND scd.end_date IS NULL
+WHEN MATCHED AND (scd.quality_class != a.quality_class OR scd.is_active != a.is_active) THEN
+    UPDATE SET end_date = CURRENT_DATE() - 1
+WHEN NOT MATCHED THEN
+    INSERT (actorid, actor, quality_class, is_active, start_date, end_date)
+    VALUES (a.actorid, a.actor, a.quality_class, a.is_active, CURRENT_DATE(), NULL);
