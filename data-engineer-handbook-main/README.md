@@ -1,6 +1,6 @@
 # The Data Engineering Handbook
 
-This repo has all the resources you need to become an amazing data engineer!
+This repo has all the resources you need to become an amazing data engineer!I started data engineering some years ago by attending Udacity data engineer nanodegree program.
 
 ## Getting started
 
